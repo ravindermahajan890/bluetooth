@@ -1,47 +1,38 @@
 <!DOCTYPE html>
 <html>
-<body>
+  <body>
+    <h1>The onclick Event</h1>
 
-<h1>The onclick Event</h1>
+    <button onclick="getDevice()">Click me</button>
 
+    <p id="demo"></p>
 
-<button onclick="getDevice()">Click me</button>
+    <script>
+      async function getDevice() {
+        navigator.bluetooth
+          .requestDevice({ filters: [{ services: [0x180f] }] })
+          .then(device => device.gatt.connect())
+          .then(server => server.getPrimaryService(0x180f))
+          .then(service => service.getCharacteristic(0x2a19))
+          .then(characteristic => characteristic.startNotifications())
+          .then(characteristic => {
+            // Set up event listener for when characteristic value changes.
+            characteristic.addEventListener(
+              'characteristicvaluechanged',
+              handleBatteryLevelChanged
+            );
+            // Reading Battery Level...
+            return characteristic.readValue();
+          })
+          .catch(error => {
+            console.log(error);
+          });
 
-<p id="demo"></p>
-
-<script>
-async function getDevice(){
-   var devices =  await navigator.bluetooth.requestDevice(
-    {filters: [{services: [0x180F]}]})
-    .then(device => {
-    console.log('Connecting to GATT Server...');
-    return device.gatt.connect();
-  })
-  var service = await devices.getPrimaryService(0x180F);
-  var characteristic = await service.getCharacteristic(0x2A19);
-  var batteryLevel = await characteristic.readValue();
-  var value = batteryLevel.getUint8(0);
-}
-navigator.bluetooth.requestDevice({ filters: [{ services: [0x180F] }] })
-.then(device => device.gatt.connect())
-.then(server => server.getPrimaryService(0x180F))
-.then(service => service.getCharacteristic(0x2A19))
-.then(characteristic => characteristic.startNotifications())
-.then(characteristic => {
-  // Set up event listener for when characteristic value changes.
-  characteristic.addEventListener('characteristicvaluechanged',
-                                  handleBatteryLevelChanged);
-  // Reading Battery Level...
-  return characteristic.readValue();
-})
-.catch(error => { console.log(error); });
-
-function handleBatteryLevelChanged(event) {
-  let batteryLevel = event.target.value.getUint8(0);
-  console.log('Battery percentage is ' + batteryLevel);
-}
-
-</script>
-
-</body>
+        function handleBatteryLevelChanged(event) {
+          let batteryLevel = event.target.value.getUint8(0);
+          document.write('Battery percentage is ' + batteryLevel);
+        }
+      }
+    </script>
+  </body>
 </html>
