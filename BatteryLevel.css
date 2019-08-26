@@ -1,0 +1,11 @@
+#batteryLabel {
+    height: 50px;
+    background: #9be8c8;
+    transition: 1s ease;
+    width: 0%;
+}
+
+#batteryWrapper{
+    width: 200px;
+    border: 1px gray solid;
+}

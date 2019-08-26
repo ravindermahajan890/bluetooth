@@ -14,5 +14,5 @@ async function getDevice() {
 }
 function handleBatteryLevelChanged(event) {
     let batteryLevel = event.target.value.getUint8(0);
-    document.write('Battery percentage is ' + batteryLevel);
+    document.getElementById("batteryLabel").style.width = batteryLevel+"%"
 }

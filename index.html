@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-  <body>
-    <h1>The onclick Event</h1>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="BatteryLevel.css"/>
+  <title></title>
+</head>
+<body>
+<h1>Battery Status</h1>
 
-    <button onclick="getDevice()">Click me</button>
+<button class="btn btn-default" onclick="getDevice()">Connect Device</button>
 
-    <p id="demo"></p>
+<div id="batteryWrapper">
+  <div id="batteryLabel"></div>
+</div>
 
-    <script type="application/javascript" src="BatteryLevel.js"></script>
-  </body>
+<script type="application/javascript" src="BatteryLevel.js"></script>
+</body>
 </html>
