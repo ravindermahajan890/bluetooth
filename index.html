@@ -1,7 +1,7 @@
 <html><head>
     <script type="text/javascript">
       async function getDevice() {
-        navigator.bluetooth
+        let devices= navigator.bluetooth
           .requestDevice({ filters: [{ services: [0x180f] }] })
           .then(device => {
             console.log('Connecting to GATT Server...');
