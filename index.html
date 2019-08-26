@@ -1,5 +1,15 @@
-<html><head>
-    <script type="text/javascript">
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>The onclick Event</h1>
+
+
+<button onclick="getDevice()">Click me</button>
+
+<p id="demo"></p>
+
+<script>
 async function getDevice(){
    var devices =  await navigator.bluetooth.requestDevice(
     {filters: [{services: [0x180F]}]})
@@ -31,15 +41,7 @@ function handleBatteryLevelChanged(event) {
   console.log('Battery percentage is ' + batteryLevel);
 }
 
-    </script>
-  </head>
+</script>
 
-  <body>
-    <button onclick="async function abc  (){
-        await getDevice();
-    }">
-      enable bluetooth
-    </button>
-  
-
-</body></html>
+</body>
+</html>
